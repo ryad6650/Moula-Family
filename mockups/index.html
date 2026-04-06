@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Famille Moula — Los Santos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500&family=Permanent+Marker&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --sunset-orange: #FF6B35;
+      --sunset-gold: #F7C948;
+      --sunset-pink: #E84393;
+      --sky-purple: #6C5CE7;
+      --sky-dark: #2D1B69;
+      --ocean-teal: #00B894;
+      --sand: #FFEAA7;
+      --dark: #0A0A12;
+      --dark-card: #12121E;
+      --text-light: #F5F0EB;
+      --text-muted: rgba(245, 240, 235, 0.5);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: var(--text-light);
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: rgba(255, 107, 53, 0.4);
+      color: #fff;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--sunset-orange); border-radius: 3px; }
+
+    /* ====== NAVBAR ====== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 10, 18, 0.7);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 107, 53, 0.1);
+    }
+
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .navbar-logo img {
+      height: 36px;
+      width: auto;
+    }
+
+    .navbar-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .navbar-links a {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .navbar-links a:hover { color: var(--sunset-gold); }
+    .navbar-links a.active { color: var(--sunset-orange); }
+
+    .nav-sep {
+      width: 1px;
+      height: 16px;
+      background: linear-gradient(180deg, transparent, var(--sunset-orange), transparent);
+      opacity: 0.4;
+    }
+
+    /* ====== HERO ====== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        url('los-santos.jpg') center/cover no-repeat;
+      filter: saturate(1.3) contrast(1.1);
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg,
+          rgba(10, 10, 18, 0.3) 0%,
+          rgba(10, 10, 18, 0.1) 40%,
+          rgba(10, 10, 18, 0.6) 70%,
+          rgba(10, 10, 18, 1) 100%
+        ),
+        linear-gradient(90deg,
+          rgba(255, 107, 53, 0.15) 0%,
+          transparent 50%
+        );
+    }
+
+    /* Scanlines effet GTA */
+    .hero-scanlines {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.03) 2px,
+        rgba(0,0,0,0.03) 4px
+      );
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Palm trees silhouette overlay */
+    .hero-palms {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background:
+        linear-gradient(180deg, transparent 0%, rgba(10,10,18,0.9) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      padding: 0 64px 80px;
+      max-width: 900px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--sunset-gold);
+      margin-bottom: 24px;
+    }
+
+    .hero-tag::before,
+    .hero-tag::after {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--sunset-gold);
+    }
+
+    .hero-title {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: clamp(60px, 10vw, 140px);
+      line-height: 0.9;
+      letter-spacing: -2px;
+      text-transform: uppercase;
+    }
+
+    .hero-title .line-1 {
+      color: var(--text-light);
+      display: block;
+    }
+
+    .hero-title .line-2 {
+      display: block;
+      background: linear-gradient(135deg, var(--sunset-orange), var(--sunset-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 40px rgba(255, 107, 53, 0.3));
+    }
+
+    .hero-subtitle {
+      margin-top: 24px;
+      font-family: 'Permanent Marker', cursive;
+      font-size: 16px;
+      letter-spacing: 6px;
+      color: var(--sunset-pink);
+      text-transform: uppercase;
+    }
+
+    .hero-desc {
+      margin-top: 20px;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 480px;
+    }
+
+    .hero-buttons {
+      margin-top: 40px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 15px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--dark);
+      background: linear-gradient(135deg, var(--sunset-orange), var(--sunset-gold));
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 0 40px rgba(255, 107, 53, 0.4);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 15px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--sunset-orange);
+      background: transparent;
+      border: 1px solid var(--sunset-orange);
+      cursor: pointer;
+      transition: all 0.3s;
+      clip-path: polygon(5% 0, 100% 0, 100% 100%, 0% 100%);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 107, 53, 0.1);
+      box-shadow: 0 0 30px rgba(255, 107, 53, 0.2);
+    }
+
+    /* Coins GTA */
+    .corner {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      z-index: 20;
+    }
+    .corner-tl { top: 24px; left: 24px; border-top: 2px solid var(--sunset-orange); border-left: 2px solid var(--sunset-orange); }
+    .corner-tr { top: 24px; right: 24px; border-top: 2px solid var(--sunset-orange); border-right: 2px solid var(--sunset-orange); }
+    .corner-bl { bottom: 24px; left: 24px; border-bottom: 2px solid var(--sunset-orange); border-left: 2px solid var(--sunset-orange); }
+    .corner-br { bottom: 24px; right: 24px; border-bottom: 2px solid var(--sunset-orange); border-right: 2px solid var(--sunset-orange); }
+
+    /* Indicateur "LOS SANTOS" style GPS GTA */
+    .location-badge {
+      position: absolute;
+      top: 90px;
+      right: 48px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(10, 10, 18, 0.6);
+      border: 1px solid rgba(255, 107, 53, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .location-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--sunset-orange);
+      border-radius: 50%;
+      animation: pulse-dot 2s ease infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(255, 107, 53, 0); }
+    }
+
+    .location-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--sunset-orange);
+      text-transform: uppercase;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 32px;
+      right: 48px;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .scroll-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: rgba(255, 107, 53, 0.5);
+      writing-mode: vertical-rl;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: var(--sunset-orange);
+      animation: scroll-anim 1.5s ease-in-out infinite;
+      transform-origin: top;
+    }
+
+    @keyframes scroll-anim {
+      0% { transform: scaleY(0); opacity: 0; }
+      50% { transform: scaleY(1); opacity: 1; }
+      100% { transform: scaleY(0); opacity: 0; transform-origin: bottom; }
+    }
+
+    /* ====== ABOUT SECTION ====== */
+    .about {
+      padding: 120px 64px;
+      position: relative;
+    }
+
+    .about::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 64px;
+      right: 64px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--sunset-orange), transparent);
+    }
+
+    .section-tag {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      letter-spacing: 4px;
+      color: var(--sunset-gold);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .feature-card {
+      position: relative;
+      padding: 40px 32px;
+      background: var(--dark-card);
+      border: 1px solid rgba(255, 107, 53, 0.08);
+      transition: all 0.4s;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--sunset-orange), var(--sunset-gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-card:hover { border-color: rgba(255, 107, 53, 0.2); transform: translateY(-4px); }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      font-size: 28px;
+    }
+
+    .feature-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      color: var(--text-light);
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    /* ====== LOS SANTOS MAP SECTION ====== */
+    .map-section {
+      padding: 100px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        url('los-santos.jpg') center/cover no-repeat;
+      opacity: 0.15;
+      filter: saturate(0.5);
+    }
+
+    .map-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .map-text { flex: 1; }
+
+    .map-visual {
+      flex: 1;
+      position: relative;
+      aspect-ratio: 16/10;
+      background:
+        url('los-santos.jpg') center/cover no-repeat;
+      border: 1px solid rgba(255, 107, 53, 0.2);
+      overflow: hidden;
+    }
+
+    .map-visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), transparent);
+    }
+
+    .map-visual .label {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      padding: 6px 14px;
+      background: rgba(10, 10, 18, 0.8);
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--sunset-gold);
+      text-transform: uppercase;
+      border: 1px solid rgba(247, 201, 72, 0.3);
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 48px;
+      margin-top: 40px;
+    }
+
+    .stat-item {}
+
+    .stat-number {
+      font-family: 'Oswald', sans-serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--sunset-orange);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ====== DISCORD / CTA ====== */
+    .cta-section {
+      padding: 120px 64px;
+      text-align: center;
+      position: relative;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 107, 53, 0.08), transparent);
+      border-radius: 50%;
+    }
+
+    .cta-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .cta-subtitle {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 18px;
+      color: var(--sunset-pink);
+      margin-bottom: 32px;
+    }
+
+    .cta-desc {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto 40px;
+    }
+
+    /* ====== FOOTER ====== */
+    .footer {
+      padding: 32px 64px;
+      border-top: 1px solid rgba(255, 107, 53, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-brand img {
+      height: 48px;
+      width: auto;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--sunset-gold); }
+
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(245, 240, 235, 0.2);
+      letter-spacing: 1px;
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 768px) {
+      .navbar { padding: 0 24px; }
+      .navbar-links { display: none; }
+      .hero-content { padding: 0 24px 60px; }
+      .about { padding: 80px 24px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .map-section { padding: 80px 24px; }
+      .map-content { flex-direction: column; }
+      .cta-section { padding: 80px 24px; }
+      .footer { padding: 24px; flex-direction: column; gap: 16px; text-align: center; }
+      .location-badge { display: none; }
+      .stat-row { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="navbar-logo"><img src="logo-moula-nav.svg" alt="Famille Moula"></a>
+    <div class="navbar-links">
+      <a href="index.html" class="active">Accueil</a>
+      <span class="nav-sep"></span>
+      <a href="membres.html">Membres</a>
+      <span class="nav-sep"></span>
+      <a href="rejoindre.html">Rejoindre</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-scanlines"></div>
+    <div class="hero-palms"></div>
+
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+
+    <!-- Badge GPS Los Santos -->
+    <div class="location-badge">
+      <div class="location-dot"></div>
+      <span class="location-text">Paris, France</span>
+    </div>
+
+    <div class="hero-content">
+      <img src="IMG_3001.webp" alt="Le Grand Paname" style="height: 80px; width: auto; margin-bottom: 8px; margin-top: -40px;">
+      <div class="hero-tag" style="justify-content: center; width: 100%;">Le Grand Paname &mdash; GTA RP</div>
+      <h1 class="hero-title">
+        <span class="line-1">Famille</span>
+        <span class="line-2">Moula</span>
+      </h1>
+      <p class="hero-subtitle">Welcome to Paris</p>
+      <p class="hero-desc">
+        La Famille Moula domine les rues de Paris. Chaque membre porte une histoire,
+        un reve, une ambition. Soumets ta candidature et rejoins l'empire.
+      </p>
+      <div class="hero-buttons">
+        <a href="rejoindre.html" class="btn-primary">
+          Rejoindre la famille
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="membres.html" class="btn-outline">Les membres</a>
+      </div>
+    </div>
+
+    <!-- Scroll -->
+    <div class="scroll-indicator">
+      <span class="scroll-text">SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <span class="section-tag">02 &mdash; Identite</span>
+    <h2 class="section-title">Plus qu'un collectif</h2>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">&#128101;</div>
+        <h3 class="feature-title">Un collectif soude</h3>
+        <p class="feature-desc">
+          Famille Moula, c'est avant tout une equipe. On avance ensemble, on se soutient, on grandit dans les rues de Paris.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#127909;</div>
+        <h3 class="feature-title">Du contenu qui claque</h3>
+        <p class="feature-desc">
+          TikTok, lives, montages &mdash; on cree du contenu authentique sous le ciel de Paris.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128293;</div>
+        <h3 class="feature-title">L'ambition sans limite</h3>
+        <p class="feature-desc">
+          On vise le sommet de Paris. Chaque jour on bosse pour faire grandir la famille et repousser les limites.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOS SANTOS SECTION -->
+  <section class="map-section">
+    <div class="map-bg"></div>
+    <div class="map-content">
+      <div class="map-text">
+        <span class="section-tag">03 &mdash; Territoire</span>
+        <h2 class="section-title">Paris est a nous</h2>
+        <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 24px;">
+          Des toits de Montmartre aux quais de Seine, la Famille Moula
+          controle le game. Chaque quartier raconte notre histoire, chaque business porte notre nom.
+        </p>
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="stat-number">24</div>
+            <div class="stat-label">Membres actifs</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">6</div>
+            <div class="stat-label">Mois d'existence</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">1</div>
+            <div class="stat-label">Famille</div>
+          </div>
+        </div>
+      </div>
+      <div class="map-visual">
+        <div class="label">Paris &mdash; Vue aerienne</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <span class="section-tag">04 &mdash; Candidature</span>
+    <h2 class="cta-title">T'as ce qu'il faut ?</h2>
+    <p class="cta-subtitle">Show us what you got</p>
+    <p class="cta-desc">
+      On cherche des gens motives, creatifs et prets a tout donner sous le ciel de Paris.
+      Si c'est toi, candidature en bas.
+    </p>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="rejoindre.html" class="btn-primary">
+        Envoyer ma candidature
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="https://discord.gg/moula-family" target="_blank" class="btn-outline">
+        Rejoindre le Discord
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span class="footer-brand"><img src="logo-moula.svg" alt="Famille Moula"></span>
+    <div class="footer-links">
+      <a href="membres.html">Membres</a>
+      <a href="rejoindre.html">Rejoindre</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Famille Moula &mdash; Le Grand Paname</p>
+  </footer>
+
+</body>
+</html>

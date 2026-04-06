@@ -33,50 +33,57 @@ export function MembreCard({ membre, index }: MembreCardProps) {
       transition={{ duration: 0.5, delay: index * 0.08 }}
       className="group relative flex flex-col overflow-hidden"
       style={{
-        minHeight: "200px",
-        padding: "24px",
-        background: "#111111",
-        border: "1px solid rgba(255,255,255,0.06)",
-        transition: "all 0.25s ease",
+        minHeight: "220px",
+        padding: "32px",
+        background: "rgba(0, 0, 0, 0.6)",
+        border: "1px solid rgba(255, 107, 0, 0.15)",
+        transition: "all 0.4s ease",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.border = "1px solid rgba(255,45,120,0.5)";
-        e.currentTarget.style.boxShadow = "0 0 20px rgba(255,45,120,0.08)";
+        e.currentTarget.style.border = "1px solid rgba(255, 107, 0, 0.5)";
+        e.currentTarget.style.boxShadow = "0 0 20px rgba(255, 107, 0, 0.08)";
+        e.currentTarget.style.transform = "translateY(-2px)";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.border = "1px solid rgba(255,255,255,0.06)";
+        e.currentTarget.style.border = "1px solid rgba(255, 107, 0, 0.15)";
         e.currentTarget.style.boxShadow = "none";
+        e.currentTarget.style.transform = "translateY(0)";
       }}
     >
+      {/* Bottom accent bar */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-[2px] transition-transform duration-400 origin-left scale-x-0 group-hover:scale-x-100"
+        style={{ background: "linear-gradient(90deg, #FF6B35, #F7C948, #E84393)" }}
+      />
+
+      {/* Index number */}
+      <span
+        className="absolute top-4 right-4 font-heading text-5xl font-bold leading-none"
+        style={{ color: "rgba(255, 107, 0, 0.06)" }}
+      >
+        {String(index + 1).padStart(2, "0")}
+      </span>
+
       {/* Avatar + infos */}
       <div className="flex items-center gap-4">
-        {/* Avatar rond 48×48 */}
         <div
           className="flex-shrink-0 flex items-center justify-center"
           style={{
-            width: "48px",
-            height: "48px",
+            width: "56px",
+            height: "56px",
             borderRadius: "50%",
-            background: "rgba(255,45,120,0.2)",
+            background: "rgba(255, 107, 0, 0.2)",
           }}
         >
-          <span
-            style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: "22px",
-              color: "#FF2D78",
-            }}
-          >
+          <span className="font-heading text-[24px]" style={{ color: "#FF6B35" }}>
             {membre.pseudo.charAt(0)}
           </span>
         </div>
 
-        {/* Nom + rôle */}
         <div className="flex-1 min-w-0">
           <h3
-            className="truncate"
+            className="font-heading truncate"
             style={{
-              fontFamily: "'Bebas Neue', sans-serif",
               fontSize: "22px",
               letterSpacing: "1px",
               color: "#ffffff",
@@ -86,11 +93,10 @@ export function MembreCard({ membre, index }: MembreCardProps) {
           </h3>
           <p
             style={{
-              fontFamily: "'Inter', sans-serif",
               fontSize: "11px",
               letterSpacing: "2px",
               textTransform: "uppercase",
-              color: "#FF2D78",
+              color: "#FF6B35",
             }}
           >
             {membre.role}
@@ -98,25 +104,33 @@ export function MembreCard({ membre, index }: MembreCardProps) {
         </div>
       </div>
 
-      {/* Icônes sociales — poussées en bas */}
-      <div className="flex items-center gap-3" style={{ marginTop: "auto" }}>
-        <a
-          href={membre.tiktok}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white/30 hover:text-neon transition-colors duration-200"
-        >
-          <TikTokIcon />
-        </a>
-        <a
-          href={membre.discord}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white/30 hover:text-neon transition-colors duration-200"
-        >
-          <DiscordIcon />
-        </a>
-      </div>
+      {/* Social icons — bottom right */}
+      {(membre.tiktok || membre.discord) && (
+        <div className="flex items-center gap-3 ml-auto" style={{ marginTop: "auto" }}>
+          {membre.tiktok && (
+            <a
+              href={membre.tiktok}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors duration-200"
+              style={{ color: "rgba(255, 255, 255, 0.3)" }}
+            >
+              <TikTokIcon />
+            </a>
+          )}
+          {membre.discord && (
+            <a
+              href={membre.discord}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors duration-200"
+              style={{ color: "rgba(255, 255, 255, 0.3)" }}
+            >
+              <DiscordIcon />
+            </a>
+          )}
+        </div>
+      )}
     </motion.div>
   );
 }

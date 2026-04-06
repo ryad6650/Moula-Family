@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
+  <defs>
+    <!-- Gradient sunset -->
+    <linearGradient id="sunset" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B35"/>
+      <stop offset="50%" style="stop-color:#F7C948"/>
+      <stop offset="100%" style="stop-color:#E84393"/>
+    </linearGradient>
+    <!-- Gradient pour le contour -->
+    <linearGradient id="stroke-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF6B35"/>
+      <stop offset="100%" style="stop-color:#F7C948"/>
+    </linearGradient>
+    <!-- Ombre portée -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#FF6B35" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Fond transparent -->
+
+  <!-- Losange / Diamant central -->
+  <g transform="translate(200, 75)" filter="url(#shadow)">
+    <!-- Losange extérieur -->
+    <polygon points="0,-50 50,0 0,50 -50,0" fill="none" stroke="url(#stroke-grad)" stroke-width="2.5"/>
+    <!-- Losange intérieur -->
+    <polygon points="0,-35 35,0 0,35 -35,0" fill="none" stroke="url(#stroke-grad)" stroke-width="1" opacity="0.4"/>
+
+    <!-- Lettre M stylisée au centre -->
+    <g filter="url(#glow)">
+      <path d="M-18,15 L-18,-12 L-6,5 L0,-5 L6,5 L18,-12 L18,15"
+            fill="none" stroke="url(#sunset)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <!-- Petites barres décoratives aux coins -->
+    <line x1="-58" y1="0" x2="-66" y2="0" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
+    <line x1="58" y1="0" x2="66" y2="0" stroke="#FF6B35" stroke-width="1.5" opacity="0.6"/>
+    <line x1="0" y1="-58" x2="0" y2="-63" stroke="#F7C948" stroke-width="1.5" opacity="0.6"/>
+    <line x1="0" y1="58" x2="0" y2="63" stroke="#F7C948" stroke-width="1.5" opacity="0.6"/>
+  </g>
+
+  <!-- Texte FAMILLE -->
+  <text x="200" y="152" text-anchor="middle"
+        font-family="'Oswald', 'Arial Narrow', sans-serif" font-weight="400" font-size="14"
+        letter-spacing="8" fill="#F5F0EB" opacity="0.5">
+    FAMILLE
+  </text>
+
+  <!-- Texte MOULA -->
+  <text x="200" y="182" text-anchor="middle"
+        font-family="'Oswald', 'Arial Narrow', sans-serif" font-weight="700" font-size="36"
+        letter-spacing="10" fill="url(#sunset)" filter="url(#shadow)">
+    MOULA
+  </text>
+
+  <!-- Lignes décoratives sous FAMILLE -->
+  <line x1="130" y1="157" x2="170" y2="157" stroke="url(#stroke-grad)" stroke-width="1" opacity="0.3"/>
+  <line x1="230" y1="157" x2="270" y2="157" stroke="url(#stroke-grad)" stroke-width="1" opacity="0.3"/>
+
+</svg>

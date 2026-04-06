@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 40" width="260" height="40">
+  <defs>
+    <linearGradient id="sunset" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B35"/>
+      <stop offset="50%" style="stop-color:#F7C948"/>
+      <stop offset="100%" style="stop-color:#E84393"/>
+    </linearGradient>
+    <linearGradient id="stroke-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF6B35"/>
+      <stop offset="100%" style="stop-color:#F7C948"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Petit losange à gauche -->
+  <g transform="translate(20, 20)">
+    <polygon points="0,-14 14,0 0,14 -14,0" fill="none" stroke="url(#stroke-grad)" stroke-width="1.8"/>
+    <!-- M dans le losange -->
+    <g filter="url(#glow)">
+      <path d="M-5.5,5 L-5.5,-4 L-2,1.5 L0,-1.5 L2,1.5 L5.5,-4 L5.5,5"
+            fill="none" stroke="url(#sunset)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <!-- Texte FAMILLE MOULA -->
+  <text x="46" y="16" font-family="'Oswald', 'Arial Narrow', sans-serif" font-weight="400" font-size="10"
+        letter-spacing="4" fill="#F5F0EB" opacity="0.5">
+    FAMILLE
+  </text>
+  <text x="46" y="32" font-family="'Oswald', 'Arial Narrow', sans-serif" font-weight="700" font-size="18"
+        letter-spacing="5" fill="url(#sunset)">
+    MOULA
+  </text>
+
+  <!-- Ligne décorative fine sous le texte -->
+  <line x1="46" y1="36" x2="120" y2="36" stroke="url(#stroke-grad)" stroke-width="0.5" opacity="0.3"/>
+</svg>

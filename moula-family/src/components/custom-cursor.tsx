@@ -46,7 +46,7 @@ export function CustomCursor() {
         width: 8,
         height: 8,
         borderRadius: "50%",
-        backgroundColor: "#c9a84c",
+        backgroundColor: "#FF6B35",
         opacity: visible ? 1 : 0,
         translateX: "-50%",
         translateY: "-50%",

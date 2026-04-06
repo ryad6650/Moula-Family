@@ -7,16 +7,18 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-neon: #FF2D78;
-  --color-neon-light: #FF5A9E;
-  --color-neon-dark: #CC1A5C;
-  --color-neon-violet: #B024FF;
-  --color-noir: #050507;
-  --color-noir-light: #111115;
-  --color-noir-card: #0C0C10;
-  --color-blanc: #F0EFF4;
+  --color-sunset: #FF6B35;
+  --color-sunset-light: #FF8A5C;
+  --color-sunset-dark: #E05520;
+  --color-sunset-gold: #F7C948;
+  --color-sunset-pink: #E84393;
+  --color-dark: #0A0A12;
+  --color-dark-light: #12121E;
+  --color-dark-card: #12121E;
+  --color-blanc: #F5F0EB;
   --font-sans: var(--font-inter);
-  --font-heading: var(--font-bebas);
+  --font-heading: var(--font-oswald);
+  --font-accent: var(--font-cormorant);
   --font-mono: var(--font-geist-mono);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -42,24 +44,24 @@
 }
 
 :root {
-  --background: #050507;
-  --foreground: #F0EFF4;
-  --card: #0C0C10;
-  --card-foreground: #F0EFF4;
-  --popover: #0C0C10;
-  --popover-foreground: #F0EFF4;
-  --primary: #FF2D78;
-  --primary-foreground: #050507;
-  --secondary: #111115;
-  --secondary-foreground: #F0EFF4;
-  --muted: #111115;
+  --background: #0A0A12;
+  --foreground: #F5F0EB;
+  --card: #12121E;
+  --card-foreground: #F5F0EB;
+  --popover: #12121E;
+  --popover-foreground: #F5F0EB;
+  --primary: #FF6B35;
+  --primary-foreground: #0A0A12;
+  --secondary: #12121E;
+  --secondary-foreground: #F5F0EB;
+  --muted: #12121E;
   --muted-foreground: #777;
-  --accent: #FF2D78;
-  --accent-foreground: #050507;
+  --accent: #FF6B35;
+  --accent-foreground: #0A0A12;
   --destructive: #e53e3e;
-  --border: #1E1E25;
-  --input: #1E1E25;
-  --ring: #FF2D78;
+  --border: #1E1E2A;
+  --input: #1E1E2A;
+  --ring: #FF6B35;
   --radius: 0px;
 }
 
@@ -87,70 +89,51 @@ body::before {
   opacity: 0.03;
 }
 
-/* Scrollbar personnalisée */
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #050507;
+  background: #0A0A12;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1E1E25;
+  background: #FF6B35;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF2D78;
+  background: #F7C948;
 }
 
 /* Selection */
 ::selection {
-  background: rgba(255, 45, 120, 0.3);
-  color: #F0EFF4;
+  background: rgba(255, 107, 53, 0.4);
+  color: #F5F0EB;
 }
 
-/* Hero depth — néon glow */
+/* Hero depth */
 .hero-section {
-  background:
-    radial-gradient(ellipse at 50% 50%, rgba(255, 45, 120, 0.08) 0%, transparent 60%),
-    #050507;
+  background: #0A0A12;
 }
 
-/* Grille GTA en fond du hero */
-.hero-grid {
+/* Scanlines GTA */
+.hero-scanlines {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 45, 120, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 45, 120, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 70%);
-  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 70%);
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
   pointer-events: none;
-}
-
-/* Ligne verticale néon */
-.editorial-line {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 80px;
-  width: 1px;
-  background: #FF2D78;
-  opacity: 0.06;
-  z-index: 40;
-  pointer-events: none;
-}
-
-@media (max-width: 768px) {
-  .editorial-line {
-    left: 24px;
-    opacity: 0.04;
-  }
+  z-index: 2;
 }
 
 /* Padding éditorial */
 .editorial-padding {
-  padding-left: 80px;
-  padding-right: 40px;
+  padding-left: 64px;
+  padding-right: 64px;
 }
 
 @media (max-width: 768px) {
@@ -160,19 +143,32 @@ body::before {
   }
 }
 
-/* Neon text glow utility */
-.neon-glow {
-  text-shadow: 0 0 30px rgba(255, 45, 120, 0.4);
+/* Sunset text glow utility */
+.sunset-glow {
+  filter: drop-shadow(0 0 40px rgba(255, 107, 53, 0.3));
 }
 
-.neon-glow-subtle {
-  text-shadow: 0 0 30px rgba(255, 45, 120, 0.4);
-}
-
-/* Neon box glow */
-.neon-box-glow {
+/* Sunset box glow */
+.sunset-box-glow {
   box-shadow:
-    0 0 15px rgba(255, 45, 120, 0.3),
-    0 0 40px rgba(255, 45, 120, 0.1),
-    inset 0 0 15px rgba(255, 45, 120, 0.05);
+    0 0 15px rgba(255, 107, 53, 0.3),
+    0 0 40px rgba(255, 107, 53, 0.1),
+    inset 0 0 15px rgba(255, 107, 53, 0.05);
+}
+
+/* Clip-path GTA style buttons */
+.btn-clip-left {
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+}
+
+.btn-clip-right {
+  clip-path: polygon(5% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+/* Corner decorations */
+.corner-decoration {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  z-index: 20;
 }

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Bebas_Neue } from "next/font/google";
+import { Inter, Oswald, Cormorant_Garamond } from "next/font/google";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { CustomCursor } from "@/components/custom-cursor";
+
 import "./globals.css";
 
 const inter = Inter({
@@ -11,9 +11,15 @@ const inter = Inter({
   display: "swap",
 });
 
-const bebasNeue = Bebas_Neue({
-  variable: "--font-bebas",
-  weight: "400",
+const oswald = Oswald({
+  variable: "--font-oswald",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -35,21 +41,20 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${inter.variable} ${bebasNeue.variable} h-full antialiased`}
+      className={`${inter.variable} ${oswald.variable} ${cormorant.variable} h-full antialiased`}
     >
       <head>
         <style
           dangerouslySetInnerHTML={{
-            __html: `body{background-color:#050507;color:#F0EFF4}`,
+            __html: `body{background-color:#0A0A12;color:#F5F0EB}`,
           }}
         />
       </head>
       <body
-        className="min-h-full flex flex-col bg-noir text-blanc"
-        style={{ backgroundColor: "#050507", color: "#F0EFF4" }}
+        className="min-h-full flex flex-col"
+        style={{ backgroundColor: "#0A0A12", color: "#F5F0EB" }}
       >
-        <CustomCursor />
-        <div className="editorial-line" />
+
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

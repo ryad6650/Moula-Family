@@ -9,27 +9,29 @@ export function LogoCompact({ className }: { className?: string }) {
       className={className}
     >
       <defs>
-        <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="2" result="blur" />
-          <feFlood floodColor="#FF2D78" floodOpacity="0.6" result="color" />
-          <feComposite in="color" in2="blur" operator="in" result="shadow" />
+        <linearGradient id="sunsetGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style={{ stopColor: "#FF6B35" }} />
+          <stop offset="100%" style={{ stopColor: "#F7C948" }} />
+        </linearGradient>
+        <filter id="glowNav">
+          <feGaussianBlur stdDeviation="1.5" result="blur" />
           <feMerge>
-            <feMergeNode in="shadow" />
+            <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
       </defs>
-      {/* F - blanc */}
-      <path
-        d="M6 6 L6 34 L10 34 L10 22 L20 22 L20 18.5 L10 18.5 L10 9.5 L22 9.5 L22 6 Z"
-        fill="#F0F0F0"
-      />
-      {/* M - rose neon avec lueur */}
-      <path
-        d="M16 34 L16 12 L23 24 L30 12 L30 34 L26.5 34 L26.5 21 L23 28 L19.5 21 L19.5 34 Z"
-        fill="#FF2D78"
-        filter="url(#neonGlow)"
-      />
+      <polygon points="20,3 37,20 20,37 3,20" fill="none" stroke="url(#sunsetGrad)" strokeWidth="1.8" />
+      <g filter="url(#glowNav)">
+        <path
+          d="M12,25 L12,15 L16,20 L20,14 L24,20 L28,15 L28,25"
+          fill="none"
+          stroke="url(#sunsetGrad)"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
     </svg>
   );
 }
@@ -45,50 +47,44 @@ export function LogoFull({ className }: { className?: string }) {
       className={className}
     >
       <defs>
-        <filter id="neonGlowFull" x="-10%" y="-10%" width="120%" height="120%">
-          <feGaussianBlur stdDeviation="1.5" result="blur" />
-          <feFlood floodColor="#FF2D78" floodOpacity="0.6" result="color" />
-          <feComposite in="color" in2="blur" operator="in" result="shadow" />
-          <feMerge>
-            <feMergeNode in="shadow" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
+        <linearGradient id="sunsetFull" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style={{ stopColor: "#FF6B35" }} />
+          <stop offset="50%" style={{ stopColor: "#F7C948" }} />
+          <stop offset="100%" style={{ stopColor: "#E84393" }} />
+        </linearGradient>
       </defs>
-      {/* Monogramme FM */}
       <g transform="translate(80, 0) scale(0.7)">
+        <polygon points="20,2 38,20 20,38 2,20" fill="none" stroke="url(#sunsetFull)" strokeWidth="2" />
         <path
-          d="M6 4 L6 32 L10 32 L10 20 L20 20 L20 16.5 L10 16.5 L10 7.5 L22 7.5 L22 4 Z"
-          fill="#F0F0F0"
-        />
-        <path
-          d="M16 32 L16 10 L23 22 L30 10 L30 32 L26.5 32 L26.5 19 L23 26 L19.5 19 L19.5 32 Z"
-          fill="#FF2D78"
-          filter="url(#neonGlowFull)"
+          d="M12,26 L12,14 L16,20 L20,13 L24,20 L28,14 L28,26"
+          fill="none"
+          stroke="url(#sunsetFull)"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
-      {/* FAMILLE - blanc */}
       <text
         x="100"
         y="42"
-        fontFamily="'Bebas Neue', sans-serif"
-        fontSize="12"
-        fill="#F0F0F0"
+        fontFamily="'Oswald', sans-serif"
+        fontSize="10"
+        fill="#F5F0EB"
         textAnchor="middle"
         letterSpacing="4"
+        opacity="0.5"
       >
         FAMILLE
       </text>
-      {/* MOULA - rose neon */}
       <text
         x="100"
         y="56"
-        fontFamily="'Bebas Neue', sans-serif"
+        fontFamily="'Oswald', sans-serif"
         fontSize="14"
-        fill="#FF2D78"
+        fill="url(#sunsetFull)"
         textAnchor="middle"
         letterSpacing="4"
-        filter="url(#neonGlowFull)"
+        fontWeight="700"
       >
         MOULA
       </text>
