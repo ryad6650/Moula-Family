@@ -29,7 +29,10 @@ export const metadata: Metadata = {
   description:
     "Moula Family, la famille GTA RP qui monte. Rejoins-nous et fais partie de l'aventure.",
   icons: {
-    icon: "/favicon.svg",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
   },
 };
 

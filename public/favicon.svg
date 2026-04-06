@@ -1,9 +1,9 @@
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" rx="4" fill="#0A0A0A"/>
+  <rect width="32" height="32" rx="4" fill="#090609"/>
   <defs>
     <filter id="g" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="1.5" result="blur"/>
-      <feFlood flood-color="#FF2D78" flood-opacity="0.6" result="color"/>
+      <feGaussianBlur stdDeviation="1" result="blur"/>
+      <feFlood flood-color="#FF2D78" flood-opacity="0.5" result="color"/>
       <feComposite in="color" in2="blur" operator="in" result="shadow"/>
       <feMerge>
         <feMergeNode in="shadow"/>
@@ -11,5 +11,8 @@
       </feMerge>
     </filter>
   </defs>
-  <path d="M6 26 L6 6 L14 18 L22 6 L22 26 L18.5 26 L18.5 14 L14 21 L9.5 14 L9.5 26 Z" fill="#FF2D78" filter="url(#g)"/>
+  <!-- F blanc -->
+  <path d="M4 26 L4 6 L13 6 L13 9.5 L7.5 9.5 L7.5 14.5 L12 14.5 L12 18 L7.5 18 L7.5 26 Z" fill="#FFFFFF"/>
+  <!-- M rose -->
+  <path d="M15 26 L15 6 L19.5 6 L22.5 14 L25.5 6 L28 6 L28 26 L25 26 L25 13 L22.5 20 L19.5 13 L19.5 26 Z" fill="#FF2D78" filter="url(#g)"/>
 </svg>
