@@ -1,0 +1,178 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-neon: #FF2D78;
+  --color-neon-light: #FF5A9E;
+  --color-neon-dark: #CC1A5C;
+  --color-neon-violet: #B024FF;
+  --color-noir: #050507;
+  --color-noir-light: #111115;
+  --color-noir-card: #0C0C10;
+  --color-blanc: #F0EFF4;
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-bebas);
+  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  --background: #050507;
+  --foreground: #F0EFF4;
+  --card: #0C0C10;
+  --card-foreground: #F0EFF4;
+  --popover: #0C0C10;
+  --popover-foreground: #F0EFF4;
+  --primary: #FF2D78;
+  --primary-foreground: #050507;
+  --secondary: #111115;
+  --secondary-foreground: #F0EFF4;
+  --muted: #111115;
+  --muted-foreground: #777;
+  --accent: #FF2D78;
+  --accent-foreground: #050507;
+  --destructive: #e53e3e;
+  --border: #1E1E25;
+  --input: #1E1E25;
+  --ring: #FF2D78;
+  --radius: 0px;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* Grain overlay global */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJnIiB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC43NSIgbnVtT2N0YXZlcz0iNCIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjxmZUNvbG9yTWF0cml4IHR5cGU9InNhdHVyYXRlIiB2YWx1ZXM9IjAiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZykiIG9wYWNpdHk9IjEiLz48L3N2Zz4=");
+  background-repeat: repeat;
+  opacity: 0.03;
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #050507;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E1E25;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF2D78;
+}
+
+/* Selection */
+::selection {
+  background: rgba(255, 45, 120, 0.3);
+  color: #F0EFF4;
+}
+
+/* Hero depth — néon glow */
+.hero-section {
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(255, 45, 120, 0.08) 0%, transparent 60%),
+    #050507;
+}
+
+/* Grille GTA en fond du hero */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 45, 120, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 45, 120, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Ligne verticale néon */
+.editorial-line {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 80px;
+  width: 1px;
+  background: #FF2D78;
+  opacity: 0.06;
+  z-index: 40;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .editorial-line {
+    left: 24px;
+    opacity: 0.04;
+  }
+}
+
+/* Padding éditorial */
+.editorial-padding {
+  padding-left: 80px;
+  padding-right: 40px;
+}
+
+@media (max-width: 768px) {
+  .editorial-padding {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+/* Neon text glow utility */
+.neon-glow {
+  text-shadow: 0 0 30px rgba(255, 45, 120, 0.4);
+}
+
+.neon-glow-subtle {
+  text-shadow: 0 0 30px rgba(255, 45, 120, 0.4);
+}
+
+/* Neon box glow */
+.neon-box-glow {
+  box-shadow:
+    0 0 15px rgba(255, 45, 120, 0.3),
+    0 0 40px rgba(255, 45, 120, 0.1),
+    inset 0 0 15px rgba(255, 45, 120, 0.05);
+}
